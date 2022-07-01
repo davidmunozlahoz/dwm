@@ -21,7 +21,7 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#770000";
-static char selbgcolor[]            = "#005577";
+static char selbgcolor[]            = "#222222";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -154,7 +154,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") }, */
 	/* { MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("~/.local/bin/sysact") },
-	/* { MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sysact") }, */
+	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sdn") },
 
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
