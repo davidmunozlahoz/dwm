@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "st"
+#define TERMINAL "alacritty"
 #define TERMCLASS "St"
 
 /* appearance */
