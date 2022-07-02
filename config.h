@@ -153,8 +153,8 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") }, */
 	/* { MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") }, */
 	/* { MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") }, */
-	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("~/.local/bin/sysact") },
-	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sdn") },
+	{ MODKEY,			XK_BackSpace,	spawn,		 SHCMD("~/.local/bin/sysact") },
+	/* { MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sdn") }, */
 
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
@@ -240,7 +240,7 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } }, */
 	/* { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") }, */
 
-	{ MODKEY,			XK_F1,		spawn,		SHCMD("pandoc -f markdown -t pdf cheatsheet.md | zathura - ") },
+	{ MODKEY,			XK_F1,		spawn,		SHCMD("pandoc -f markdown -t pdf ~/.local/share/cheatsheet.md | zathura - ") },
 	/* { MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") }, */
 	/* { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
