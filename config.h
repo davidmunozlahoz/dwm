@@ -209,13 +209,13 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
-	/* { MODKEY,			XK_c,		spawn,		SHCMD("") }, */
+	{ MODKEY,			XK_c,		spawn,		SHCMD(TERMINAL " -e bluetoothctl") },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("") }, */
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e vim -c VimwikiIndex") },
-	/* { MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+6 dwmblocks") }, */
+	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat") },
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	/* { MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_comma,	shiftview,		{ .i = -1 } },
@@ -248,8 +248,8 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, */
-	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
-	/* { MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") }, */
+	{ MODKEY,			XK_F9,		spawn,		SHCMD("~/.local/bin/dmenumount") },
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("~/.local/bin/dmenuumount") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	/* { MODKEY,			XK_F12,		spawn,		SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") }, */
 	{ MODKEY,			XK_space,	zoom,		{0} },
