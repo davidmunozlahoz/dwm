@@ -273,7 +273,7 @@ static Key keys[] = {
 	/* { 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") }, */
 	/* { 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") }, */
 	/* { 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") }, */
-	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_PowerOff,		spawn,		SHCMD("~/.local/bin/sysact") },
 	/* { 0, XF86XK_Calculator,		spawn,		SHCMD(TERMINAL " -e bc -l") }, */
 	{ 0, XF86XK_Sleep,		spawn,		SHCMD("sudo -A zzz") },
