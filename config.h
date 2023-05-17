@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "alacritty"
+#define TERMINAL "st"
 #define TERMCLASS "St"
 
 /* appearance */
@@ -15,7 +15,7 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
+static char *fonts[]          = { "monospace:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -135,9 +135,9 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
+	/* { MODKEY|ShiftMask,	XK_Escape,	spawn,	SHCMD("") }, */
 	/* { MODKEY,			XK_grave,	spawn,	SHCMD("dmenuunicode") }, */
-	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
+	{ MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") },
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
 	TAGKEYS(			XK_3,		2)
@@ -176,6 +176,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
+	{ MODKEY,			XK_p,			spawn,		SHCMD("xournalpp") },
 	/* { MODKEY,			XK_p,			spawn,		SHCMD("mpc toggle") }, */
 	/* { MODKEY|ShiftMask,		XK_p,			spawn,		SHCMD("mpc pause ; pauseallmpv") }, */
 	/* { MODKEY,			XK_bracketleft,		spawn,		SHCMD("mpc seek -10") }, */
@@ -200,8 +201,8 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } }, */
 	{ MODKEY,			XK_apostrophe,	spawn,	SHCMD(TERMINAL " -e bc -liq") },
 	/* { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} }, */
-	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
-	/* { MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} }, */
+	{ MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") },
+	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
 
@@ -242,7 +243,7 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("pandoc -f markdown -t pdf ~/.local/share/cheatsheet.md | zathura - ") },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("~/.local/bin/dmenuunicode") },
-	/* { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("~/.local/bin/displayselect") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
@@ -257,19 +258,19 @@ static Key keys[] = {
 
 	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,			XK_Print,	spawn,		SHCMD("~/.local/bin/maimpick") },
-	/* { MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") }, */
-	/* { MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") }, */
+	{ MODKEY,			XK_Print,	spawn,		SHCMD("~/.local/bin/dmenurecord") },
+	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("~/.local/bin/dmenurecord kill yes") },
 	/* { MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") }, */
-	/* { MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") }, */
+	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("mpc prev") },
-	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("mpc next") },
+	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("playerctl previous") },
+	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("playerctl next") },
 	/* { 0, XF86XK_AudioPause,		spawn,		SHCMD("mpc pause") }, */
-	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("mpc toggle") },
-	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mpc stop") },
+	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("playerctl play-pause") },
+	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("playerctl stop") },
 	/* { 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") }, */
 	/* { 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") }, */
 	/* { 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") }, */
@@ -285,7 +286,7 @@ static Key keys[] = {
 	/* { 0, XF86XK_MyComputer,		spawn,		SHCMD(TERMINAL " -e lfub /") }, */
 	/* { 0, XF86XK_Battery,		spawn,		SHCMD("") }, */
 	/* { 0, XF86XK_Launch1,		spawn,		SHCMD("xset dpms force off") }, */
-	/* { 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") }, */
+	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	/* { 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") }, */
 	/* { 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") }, */
 	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 10; kill -45 $(pidof dwmblocks)") },
