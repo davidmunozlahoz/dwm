@@ -55,6 +55,7 @@ static const Rule rules[] = {
 	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
 	{ TERMCLASS,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
 	{ TERMCLASS,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
+	{ "widget",   NULL,       NULL,       	    0,     1,           0,         0,        -1 },
 };
 
 /* layout(s) */
@@ -201,10 +202,10 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } }, */
 	{ MODKEY,			XK_apostrophe,	spawn,	SHCMD(TERMINAL " -e bc -liq") },
 	/* { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} }, */
-	{ MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") },
+	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
 	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} }, */
+	/* { MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.v = spterm } }, */
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
