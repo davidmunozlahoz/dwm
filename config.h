@@ -5,7 +5,7 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static unsigned int borderpx  = 2;        /* border pixel of windows */
+static unsigned int borderpx  = 1.5;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -16,12 +16,12 @@ static int smartgaps          = 1;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "monospace:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true", "iosevka" };
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#d4af37";
-static char selbgcolor[]            = "#222222";
+static char normbgcolor[]           = "#1E2326";
+static char normbordercolor[]       = "#A7C080";
+static char normfgcolor[]           = "#D3C6AA";
+static char selfgcolor[]            = "#A7C080";
+static char selbordercolor[]        = "#E69875";
+static char selbgcolor[]            = "#1E2326";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -41,7 +41,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -50,12 +50,13 @@ static const Rule rules[] = {
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
-	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         0,        -1 },
-	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
-	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
-	{ TERMCLASS,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
-	{ TERMCLASS,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
-	{ "widget",   NULL,       NULL,       	    0,     1,           0,         0,        -1 },
+	/*{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         1,        -1 },*/
+	/*{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },*/
+	/*{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },*/
+	/*{ TERMCLASS,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },*/
+	/*{ TERMCLASS,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },*/
+	/*{ "st", NULL,    "st",       	    1 << 8,     1,           0,         0,        0 },*/
+	/*{ "st", NULL,    "/home/david/.local/bin/lfub",       	    1 << 8,     1,           0,         1,        -1 },*/
 };
 
 /* layout(s) */
@@ -66,7 +67,7 @@ static int resizehints = 0;    /* 1 means respect size hints in tiled resizals *
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",	tile },			/* Default: Master on left, slaves on right */
+	{ "",	tile },			/* Default: Master on left, slaves on right */
 	{ "TTT",	bstack },		/* Master on top, slaves on bottom */
 
 	{ "[@]",	spiral },		/* Fibonacci spiral */
@@ -165,7 +166,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
 	/* { MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") }, */
 	/* { MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") }, */
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ~/.local/bin/lfub") },
+	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e yazi") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
@@ -178,6 +179,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,			spawn,		SHCMD("xournalpp") },
+	{ MODKEY|ShiftMask,	XK_p,			spawn,		SHCMD("zotero") },
 	/* { MODKEY,			XK_p,			spawn,		SHCMD("mpc toggle") }, */
 	/* { MODKEY|ShiftMask,		XK_p,			spawn,		SHCMD("mpc pause ; pauseallmpv") }, */
 	/* { MODKEY,			XK_bracketleft,		spawn,		SHCMD("mpc seek -10") }, */
@@ -214,7 +216,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_c,		spawn,		SHCMD(TERMINAL " -e bluetoothctl") },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("") }, */
 	/* V is automatically bound above in STACKKEYS */
-	{ MODKEY,			XK_b,		togglebar,	{0} },
+	{ MODKEY,			XK_b,		spawn,	SHCMD("python /home/david/dev/bookmarks/bookmarks.py") },
+	{ MODKEY|ShiftMask,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e vim -c VimwikiIndex") },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat") },
@@ -244,9 +247,9 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("pandoc -f markdown -t pdf ~/.local/share/cheatsheet.md | zathura - ") },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("~/.local/bin/dmenuunicode") },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("~/.local/bin/displayselect") },
-	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
-	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("~/.local/bin/dmenunerdfonts") },
+	{ MODKEY,			XK_F4,		spawn,		SHCMD("~/.local/bin/displayselect") },
+	{ MODKEY,			XK_F5,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, */
